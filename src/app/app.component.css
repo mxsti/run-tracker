@@ -1,0 +1,16 @@
+.runcardcontainer {
+  @apply p-2 w-full lg:w-4/12
+}
+
+#statisticcontainer .hidden-child {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.1s linear, opacity 0.1s linear;
+}
+
+@media only screen and (min-width: 768px) {
+  #statisticcontainer:hover .hidden-child {
+    visibility: visible;
+    opacity: 1;
+  }
+}
