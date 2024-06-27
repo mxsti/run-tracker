@@ -1,0 +1,17 @@
+<div class="flex h-screen items-center text-center flex-col" *ngIf="runs$ | async; let runs">
+  <div class="text-8xl p-5">🏃🏻‍</div>
+  <div id="statisticcontainer" class="flex justify-between text-xl p-3 w-1/3 cursor-pointer">
+    <div class="hidden-child w-1/4 flex flex-col items-center px-2"><span>{{ totalLength$ | async }} km</span>total
+    </div>
+    <div class="w-1/2 flex flex-col items-center text-center px-2"><span
+      class="text-7xl hover:scale-125">{{ runs.length }}</span><span class="text-lg">days of running since the challenge started!</span>
+    </div>
+    <div class="hidden-child w-1/4 flex flex-col items-center text-center px-2">
+      <span>{{ (averageDistance$ | async)?.toFixed(2) }} km</span>on average
+    </div>
+  </div>
+
+  <div class="runcardcontainer" *ngFor="let run of runs">
+    <app-run-card [run]="run"></app-run-card>
+  </div>
+</div>
