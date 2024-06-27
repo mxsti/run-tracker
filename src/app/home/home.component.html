@@ -1,0 +1,26 @@
+<div class="flex flex-col items-center text-center" *ngIf="runs$ | async; let runs">
+  @if (this.authService.currentUserSig()) {
+    <a class="absolute top-5 left-10 border-2 p-2 rounded-lg border-[#fc5200] cursor-pointer lg:fixed" (click)="authService.logout()">Logout</a>
+  } @else {
+    <a class="absolute top-5 left-10 border-2 p-2 rounded-lg border-[#fc5200] lg:fixed" routerLink="/login"
+       routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+  }
+  <div class="text-8xl p-5">🏃🏻‍</div>
+  @if (this.authService.currentUserSig()) {
+    <div id="statisticcontainer" class="flex justify-between text-xl p-3 w-1/3 cursor-pointer">
+      <div class="hidden-child w-1/4 flex flex-col items-center px-2"><span>{{ totalLength$ | async }} km</span>total
+      </div>
+      <div class="w-1/2 flex flex-col items-center text-center px-2"><span
+        class="text-7xl hover:scale-125">{{ runs.length }}</span><span class="text-lg">days of running since the challenge started!</span>
+      </div>
+      <div class="hidden-child w-1/4 flex flex-col items-center text-center px-2">
+        <span>{{ (averageDistance$ | async)?.toFixed(2) }} km</span>on average
+      </div>
+    </div>
+    <div class="runcardcontainer" *ngFor="let run of runs">
+      <app-run-card [run]="run"></app-run-card>
+    </div>
+  } @else {
+    <div class="text-xl">Logge dich ein um hier etwas zu sehen!</div>
+  }
+</div>
