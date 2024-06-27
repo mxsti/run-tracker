@@ -4,16 +4,19 @@ import {map, Observable} from "rxjs";
 import {Run} from "../model/run";
 import {RunCardComponent} from "../run-card/run-card.component";
 import {AsyncPipe, NgFor, NgIf} from "@angular/common";
+import {RouterLink, RouterLinkActive} from "@angular/router";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RunCardComponent, AsyncPipe, NgFor, NgIf],
+  imports: [RunCardComponent, AsyncPipe, NgFor, NgIf, RouterLinkActive, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   runService = inject(RunService)
+  authService = inject(AuthService);
   runs$: Observable<Run[]>;
   totalLength$: Observable<string>; // string because we call toFixed
   averageDistance$: Observable<number>; // string because we call toFixed
