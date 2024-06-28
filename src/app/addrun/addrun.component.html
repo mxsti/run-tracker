@@ -6,14 +6,8 @@
   @if (errorMessage) {
     <div class="border-2 border-red-500 p-2 m-2 rounded-lg bg-red-500 text-white">{{ errorMessage }}</div>
   }
-  <div class="absolute top-5 left-5 w-2/12 p-2 flex justify-start text-center lg:fixed">
-    @if (!authService.currentUserSig()) {
-      <a
-        class="w-1/3 border-2 p-2 mr-2 rounded-lg border-[#fc5200] bg-[#fc5200] text-[#f7f7fa]"
-        routerLink="/login"
-        routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
-    }
-    <a class="w-1/3 border-2 p-2 rounded-lg border-[#fc5200] text-[#fc5200]"
+  <div class="fixed top-5 left-5 w-2/12 p-2 flex justify-start text-center">
+    <a class="w-1/3 p-2 text-[#fc5200]"
        routerLink="/"
        routerLinkActive="active" ariaCurrentWhenActive="page">Zurück</a>
   </div>
