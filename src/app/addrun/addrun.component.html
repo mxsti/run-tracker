@@ -1,0 +1,42 @@
+<div class="flex flex-col items-center pt-10">
+  <div class="flex flex-col items-center text-xl">
+    <p class="text-5xl p-2"> 🚀</p>
+    Lauf hinzufügen
+  </div>
+  @if (errorMessage) {
+    <div class="border-2 border-red-500 p-2 m-2 rounded-lg bg-red-500 text-white">{{ errorMessage }}</div>
+  }
+  <div class="absolute top-5 left-5 w-2/12 p-2 flex justify-start text-center lg:fixed">
+    @if (!authService.currentUserSig()) {
+      <a
+        class="w-1/3 border-2 p-2 mr-2 rounded-lg border-[#fc5200] bg-[#fc5200] text-[#f7f7fa]"
+        routerLink="/login"
+        routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+    }
+    <a class="w-1/3 border-2 p-2 rounded-lg border-[#fc5200] text-[#fc5200]"
+       routerLink="/"
+       routerLinkActive="active" ariaCurrentWhenActive="page">Zurück</a>
+  </div>
+  <form class="flex flex-col items-center w-1/2 p-4 text-center" [formGroup]="addRunForm"
+        (ngSubmit)="onAddrunFormSubmit()">
+    <div class="flex flex-col">
+      <label class="self-start" for="timestamp">Datum</label>
+      <input class="w-full border border-[#fc5200] rounded-lg p-2 focus:outline-none focus:shadow-outline"
+             id="timestamp"
+             type="date" formControlName="timestamp">
+    </div>
+    <div class="flex flex-col pt-2">
+      <label class="self-start" for="length">Länge</label>
+      <input class="w-full border border-[#fc5200] rounded-lg p-2 focus:outline-none focus:shadow-outline"
+             id="length" type="number" formControlName="length">
+    </div>
+    <div class="flex flex-col pt-2">
+      <label class="self-start" for="strava">Strava Link</label>
+      <input class="w-full border border-[#fc5200] rounded-lg p-2 focus:outline-none focus:shadow-outline"
+             id="strava" type="text" formControlName="strava">
+    </div>
+    <button class="border-2 rounded-lg p-2 mt-4 border-[#fc5200] bg-[#fc5200] text-[#f7f7fa]" type="submit"
+            [disabled]="!addRunForm.valid">Senden
+    </button>
+  </form>
+</div>

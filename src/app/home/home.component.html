@@ -1,11 +1,20 @@
 <div class="flex flex-col items-center text-center" *ngIf="runs$ | async; let runs">
-  @if (this.authService.currentUserSig()) {
-    <a class="absolute top-5 left-10 border-2 p-2 rounded-lg border-[#fc5200] cursor-pointer lg:fixed" (click)="authService.logout()">Logout</a>
-  } @else {
-    <a class="absolute top-5 left-10 border-2 p-2 rounded-lg border-[#fc5200] lg:fixed" routerLink="/login"
-       routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
-  }
-  <div class="text-8xl p-5">🏃🏻‍</div>
+  <div class="absolute top-5 left-5 w-2/12 p-2 flex justify-start text-center lg:fixed">
+    @if (this.authService.currentUserSig()) {
+      <a class="w-1/3 border-2 p-2 rounded-lg border-[#fc5200] bg-[#fc5200] text-[#f7f7fa] cursor-pointer"
+         (click)="authService.logout()">Logout</a>
+    } @else {
+      <a class="w-1/3 border-2 p-2 rounded-lg border-[#fc5200] bg-[#fc5200] text-[#f7f7fa]" routerLink="/login"
+         routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+    }
+  </div>
+  <div class="text-8xl p-5">
+    @if(this.authService.currentUserSig()) {
+    <a routerLink="/addrun" routerLinkActive="active" ariaCurrentWhenActive="page">🏃🏻</a>
+    } @else {
+      🏃🏻
+    }
+  </div>
   @if (this.authService.currentUserSig()) {
     <div id="statisticcontainer" class="flex justify-between text-xl p-3 w-1/3 cursor-pointer">
       <div class="hidden-child w-1/4 flex flex-col items-center px-2"><span>{{ totalLength$ | async }} km</span>total

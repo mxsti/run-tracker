@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {collection, collectionData, Firestore} from "@angular/fire/firestore";
+import {addDoc, collection, collectionData, Firestore, Timestamp} from "@angular/fire/firestore";
 import {Run} from "../model/run";
 import {map, Observable, tap} from "rxjs";
 
@@ -24,5 +24,11 @@ export class RunService {
     );
   };
 
-
+  async createRun(timestamp: string, length: number, strava: string) {
+    return addDoc(collection(this.firestore, 'runs'), {
+      timestamp: Timestamp.fromDate(new Date(timestamp)),
+      length: length,
+      strava: strava,
+    })
+  }
 }

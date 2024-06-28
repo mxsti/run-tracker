@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive } from "@angular/router";
 import {FormGroup, FormControl, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
@@ -8,8 +8,9 @@ import {Router} from "@angular/router";
   selector: 'app-login',
   standalone: true,
   imports: [
-    RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
