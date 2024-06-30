@@ -23,7 +23,7 @@
         class="text-7xl hover:scale-125">{{ runs.length }}</span><span class="text-lg">days of running since the challenge started in June 2024!</span>
       </div>
       <div class="hidden-child w-1/4 flex flex-col items-center text-center px-2">
-        <span>{{ (averageDistance$ | async)?.toFixed(2) }} km</span>on average
+        <span>{{ (averageDistance$ | async)?.toFixed(2) }} km</span>average
       </div>
     </div>
     <div class="runcardcontainer" *ngFor="let run of runs">
