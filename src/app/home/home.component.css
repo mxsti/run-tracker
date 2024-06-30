@@ -14,3 +14,13 @@
     opacity: 1;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  #statisticcontainer .hidden-child {
+    visibility: visible;
+    opacity: 1;
+  }
+  #statisticcontainer {
+    width: 100%;
+  }
+}

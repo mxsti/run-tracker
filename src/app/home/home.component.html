@@ -9,25 +9,46 @@
     }
   </div>
   <div class="text-8xl p-5">
-    @if(this.authService.currentUserSig()) {
-    <a routerLink="/addrun" routerLinkActive="active" ariaCurrentWhenActive="page">🏃🏻</a>
+    @if (this.authService.currentUserSig()) {
+      <a routerLink="/addrun" routerLinkActive="active" ariaCurrentWhenActive="page">🏃🏻</a>
     } @else {
       🏃🏻
     }
   </div>
   @if (this.authService.currentUserSig()) {
     <div id="statisticcontainer" class="flex justify-between text-xl p-3 w-1/3 cursor-pointer">
-      <div class="hidden-child w-1/4 flex flex-col items-center px-2"><span>{{ totalLength$ | async }} km</span>total
+      <div class="w-1/4 flex flex-col items-center px-2 hidden-child"><span>{{ totalLength$ | async }} km</span>total
       </div>
       <div class="w-1/2 flex flex-col items-center text-center px-2"><span
         class="text-7xl hover:scale-125">{{ runs.length }}</span><span class="text-lg">days of running since the challenge started in June 2024!</span>
       </div>
-      <div class="hidden-child w-1/4 flex flex-col items-center text-center px-2">
+      <div class="w-1/4 flex flex-col items-center text-center px-2 hidden-child">
         <span>{{ (averageDistance$ | async)?.toFixed(2) }} km</span>on average
       </div>
     </div>
-    <div class="runcardcontainer" *ngFor="let run of runs">
-      <ul><app-run-card [run]="run"></app-run-card></ul>
+    <div class="w-11/12 text-lg cursor-pointer border-2 rounded-xl border-[#d9d9e6] p-2 lg:w-1/3">
+      <cdk-accordion>
+        <cdk-accordion-item
+          #accordionItem="cdkAccordionItem"
+          expanded="true">
+          <div class="run-accordion-item-header pb-2 {{ accordionItem.expanded ? 'border-b-2 border-[#d9d9e6]' : '' }}" (click)="accordionItem.toggle()">
+        <span class="run-accordion-item-description">
+          <p>Juni 2024</p>
+          Klicken um zu  {{ accordionItem.expanded ? 'schließen' : 'öffnen' }}
+        </span>
+          </div>
+          @for (run of runs; track run; let index = $index) {
+            <div
+              class="run-accordion-item-body m-5"
+              role="region"
+              [style.display]="accordionItem.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + index"
+              [attr.aria-labelledby]="'accordion-header-' + index">
+              <app-run-card [run]="run"></app-run-card>
+            </div>
+          }
+        </cdk-accordion-item>
+      </cdk-accordion>
     </div>
   } @else {
     <div class="text-xl">Logge dich ein um hier etwas zu sehen!</div>

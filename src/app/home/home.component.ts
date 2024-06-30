@@ -6,11 +6,12 @@ import {RunCardComponent} from "../run-card/run-card.component";
 import {AsyncPipe, NgFor, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthService} from "../service/auth.service";
+import {CdkAccordionModule} from '@angular/cdk/accordion';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RunCardComponent, AsyncPipe, NgFor, NgIf, RouterLinkActive, RouterLink],
+  imports: [RunCardComponent, AsyncPipe, NgFor, NgIf, RouterLinkActive, RouterLink, CdkAccordionModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
