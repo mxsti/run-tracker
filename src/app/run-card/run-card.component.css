@@ -1,0 +1,8 @@
+.scale-on-hover {
+ transition: scale .3s;
+}
+
+.scale-on-hover:hover {
+  scale: 105%;
+}
+
