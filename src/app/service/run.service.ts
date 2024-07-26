@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {addDoc, collection, collectionData, Firestore, Timestamp} from "@angular/fire/firestore";
-import {Run} from "../model/run";
 import {map, Observable, tap} from "rxjs";
+import {PolarRun} from "../model/polar_run";
 
 @Injectable({
   providedIn: 'root'
@@ -9,26 +9,26 @@ import {map, Observable, tap} from "rxjs";
 export class RunService {
   firestore: Firestore = inject(Firestore);
 
-  getRuns(): Observable<Run[]> {
-    // reference to the runs collection
-    const runsCollection = collection(this.firestore, 'runs');
-
-    return collectionData(runsCollection).pipe(
-      // map over runs to create correct date field
-      map((runs: Run[]) => runs.map((run: Run) => {
-        run.date = new Date(run.timestamp.seconds * 1000);
-        return run;
-      })),
-      // sort by date to show correctly in component
-      tap((runs: Run[]) => runs.sort((a, b) => b.date.getTime() - a.date.getTime()))
-    );
-  };
-
+  // currently not used -> runs are created automatically from polar api
   async createRun(timestamp: string, length: number, strava: string) {
     return addDoc(collection(this.firestore, 'runs'), {
       timestamp: Timestamp.fromDate(new Date(timestamp)),
       length: length,
       strava: strava,
     })
+  }
+
+  getPolarRuns(): Observable<PolarRun[]> {
+    // reference to the runs collection
+    const runsCollection = collection(this.firestore, 'runs_polar');
+    return collectionData(runsCollection).pipe(
+      // map over runs to create date
+      map((runs: PolarRun[]) => runs.map((run: PolarRun) => {
+        run.date = new Date(run.start_time);
+        return run;
+      })),
+      // sort by date to show correctly in component
+      tap((runs: PolarRun[]) => runs.sort((a, b) => b.date.getTime() - a.date.getTime()))
+    );
   }
 }

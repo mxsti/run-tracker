@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Run} from "../model/run";
+import {PolarRun} from "../model/polar_run";
 
 @Component({
   selector: 'app-run-card',
@@ -10,5 +10,5 @@ import {Run} from "../model/run";
 })
 export class RunCardComponent {
   @Input()
-  run: Run | undefined;
+  run: PolarRun | undefined;
 }
