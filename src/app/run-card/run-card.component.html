@@ -1,8 +1,6 @@
-<a href="{{ run?.strava }}" target="_blank">
-  <div
-    class="flex flex-col items-center rounded-xl w-full p-5 text-xl lg:border-2 border-[#d9d9e6] lg:flex-row justify-between scale-on-hover">
-    <div>{{ run?.date?.toLocaleDateString() }}</div>
-    <div>{{ run?.length }}km</div>
-  </div>
-</a>
+<div
+  class="flex flex-col items-center rounded-xl w-full p-5 text-xl lg:border-2 border-[#d9d9e6] lg:flex-row justify-between scale-on-hover">
+  <div>{{ run?.date?.toLocaleDateString() }}</div>
+  <div>{{ run?.distance }}m</div>
+</div>
 
