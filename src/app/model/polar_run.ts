@@ -6,4 +6,5 @@ export interface PolarRun {
   heart_rate: number,
   start_time: string,
   date: Date,
+  formatted_duration: string | null,
 }

@@ -25,10 +25,14 @@ export class RunService {
       // map over runs to create date
       map((runs: PolarRun[]) => runs.map((run: PolarRun) => {
         run.date = new Date(run.start_time);
+        run.calories = run.calories ? run.calories : 0;
+        run.formatted_duration = run.duration ? this.fmtMSS(run.duration) : null;
         return run;
       })),
       // sort by date to show correctly in component
       tap((runs: PolarRun[]) => runs.sort((a, b) => b.date.getTime() - a.date.getTime()))
     );
   }
+
+  private fmtMSS(s: number){return(s-(s%=60))/60+(9<s?':':':0')+s}
 }
