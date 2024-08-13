@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "../service/auth.service";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {RunService} from "../service/run.service";
+import {WorkoutService} from "../service/workout.service";
 
 @Component({
   selector: 'app-addrun',
@@ -15,7 +15,7 @@ import {RunService} from "../service/run.service";
 export class AddrunComponent {
   authService = inject(AuthService)
   router = inject(Router)
-  runService = inject(RunService)
+  runService = inject(WorkoutService)
   errorMessage: string | null = null;
 
   addRunForm = new FormGroup({

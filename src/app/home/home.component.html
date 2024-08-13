@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center text-center" *ngIf="runs$ | async; let runs">
+<div class="flex flex-col items-center text-center mt-10" *ngIf="workouts$ | async; let workouts">
   <div class="fixed top-5 left-5 w-2/12 p-2 flex justify-start text-center">
     @if (this.authService.currentUserSig()) {
       <a class="w-1/3 sticky p-2 text-[#fc5200] cursor-pointer"
@@ -8,23 +8,37 @@
          routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
     }
   </div>
-  <div class="text-8xl p-5">
-    🏃
-  </div>
   @if (this.authService.currentUserSig()) {
-    <div id="statisticcontainer" class="flex justify-between text-xl p-3 w-1/3 cursor-pointer">
-      <div class="hidden-child w-1/4 flex flex-col items-center px-2"><span>{{ totalLength$ | async }} km</span>total
+    <div id="statisticcontainer" class="flex justify-between text-xl p-3 w-1/2">
+      <div class="w-1/4 flex flex-col items-center px-2">
+        <div>
+          <img alt="run" ngSrc="/icons/run.svg" height="48" width="48"/>
+        </div>
+        <div class="pt-2">
+          {{ (runTotal$ | async)}}km total
+        </div>
+        <div class="pt-2">
+          {{ (averageRunDistance$ | async)?.toFixed(2) }}km on average
+        </div>
       </div>
       <div class="w-1/2 flex flex-col items-center text-center px-2"><span
-        class="text-7xl hover:scale-125">{{ runs.length }}</span><span class="text-lg">days of running since the challenge started in June 2024!</span>
+        class="text-7xl hover:scale-125">{{ workouts.length }}</span><span>workouts since June 2024!</span>
       </div>
-      <div class="hidden-child w-1/4 flex flex-col items-center text-center px-2">
-        <span>{{ (averageDistance$ | async)?.toFixed(2) }} km</span>average
+      <div class="w-1/4 flex flex-col items-center px-2">
+        <div>
+          <img alt="bike" ngSrc="/icons/bike.svg" height="48" width="48"/>
+        </div>
+        <div class="pt-2">
+          {{ (rideTotal$ | async)}}km total
+        </div>
+        <div class="pt-2">
+          {{ (averageRideDistance$ | async)?.toFixed(2) }}km on average
+        </div>
       </div>
     </div>
-    <div class="runcardcontainer" *ngFor="let run of runs">
+    <div class="runcardcontainer" *ngFor="let workout of workouts">
       <ul>
-        <app-run-card [run]="run"></app-run-card>
+        <app-run-card [run]="workout"></app-run-card>
       </ul>
     </div>
   } @else {

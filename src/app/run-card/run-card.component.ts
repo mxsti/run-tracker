@@ -1,14 +1,17 @@
 import {Component, Input} from '@angular/core';
-import {PolarRun} from "../model/polar_run";
+import {Workout} from "../model/polar_run";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-run-card',
   standalone: true,
-  imports: [],
+  imports: [
+    NgOptimizedImage
+  ],
   templateUrl: './run-card.component.html',
   styleUrl: './run-card.component.css'
 })
 export class RunCardComponent {
   @Input()
-  run: PolarRun | undefined;
+  run: Workout | undefined;
 }

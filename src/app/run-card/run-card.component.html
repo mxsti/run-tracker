@@ -1,19 +1,24 @@
 @if (run) {
-  <div class="items-center rounded-xl w-full p-5 text-xl lg:border-2 border-[#d9d9e6] scale-on-hover more-on-hover ">
+  <div class="items-center rounded-xl w-full p-4 text-xl lg:border-2 border-[#d9d9e6] scale-on-hover more-on-hover ">
     <div class="flex flex-col lg:flex-row justify-between">
-      <div>{{ run.date.toLocaleDateString() }}</div>
-      <div>{{ run.distance }}m</div>
+      @if (run.type === "ride") {
+        <div class="text-5xl"><img alt="bike" ngSrc="/icons/bike.svg" height="48" width="48"/></div>
+      } @else {
+        <div class="text-5xl"><img alt="run" ngSrc="/icons/run.svg" height="48" width="48"/></div>
+      }
+      <div class="flex justify-center">{{ run.date.toLocaleDateString() }}</div>
+      <div>{{ (run.distance / 1000).toFixed(2) }}km</div>
     </div>
     @if (run.calories || run.heart_rate || run.formatted_duration) {
       <div class="flex flex-row justify-between mt-5">
         @if (run.calories) {
-          <div>{{ run.calories }}kcal</div>
+          <div>{{ run.calories.toString().split(".")[0] }}kcal</div>
         }
         @if (run.heart_rate) {
-          <div>{{ run.heart_rate }}❤️</div>
+          <div class="flex justify-center">{{ run.heart_rate.toString().split(".")[0] }}bpm</div>
         }
         @if (run.formatted_duration) {
-          <div>{{ run.formatted_duration }}⏱️</div>
+          <div>{{ run.formatted_duration }}mm:ss</div>
         }
       </div>
     }

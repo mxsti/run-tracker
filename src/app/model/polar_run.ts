@@ -1,4 +1,4 @@
-export interface PolarRun {
+export interface Workout {
   id: string,
   distance: number,
   calories: number,
@@ -7,4 +7,5 @@ export interface PolarRun {
   start_time: string,
   date: Date,
   formatted_duration: string | null,
+  type: "run" | "ride",
 }

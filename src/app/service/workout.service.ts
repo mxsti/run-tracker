@@ -1,12 +1,12 @@
 import {inject, Injectable} from '@angular/core';
 import {addDoc, collection, collectionData, Firestore, Timestamp} from "@angular/fire/firestore";
 import {map, Observable, tap} from "rxjs";
-import {PolarRun} from "../model/polar_run";
+import {Workout} from "../model/polar_run";
 
 @Injectable({
   providedIn: 'root'
 })
-export class RunService {
+export class WorkoutService {
   firestore: Firestore = inject(Firestore);
 
   // currently not used -> runs are created automatically from polar api
@@ -18,19 +18,19 @@ export class RunService {
     })
   }
 
-  getPolarRuns(): Observable<PolarRun[]> {
+  getWorkouts(): Observable<Workout[]> {
     // reference to the runs collection
     const runsCollection = collection(this.firestore, 'runs_polar');
     return collectionData(runsCollection).pipe(
       // map over runs to create date
-      map((runs: PolarRun[]) => runs.map((run: PolarRun) => {
+      map((runs: Workout[]) => runs.map((run: Workout) => {
         run.date = new Date(run.start_time);
         run.calories = run.calories ? run.calories : 0;
         run.formatted_duration = run.duration ? this.fmtMSS(run.duration) : null;
         return run;
       })),
       // sort by date to show correctly in component
-      tap((runs: PolarRun[]) => runs.sort((a, b) => b.date.getTime() - a.date.getTime()))
+      tap((runs: Workout[]) => runs.sort((a, b) => b.date.getTime() - a.date.getTime()))
     );
   }
 
