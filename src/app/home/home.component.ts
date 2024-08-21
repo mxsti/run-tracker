@@ -37,7 +37,7 @@ export class HomeComponent {
     this.runTotal$ = this.runs$.pipe(
       map((runs: Workout[]) => runs.reduce((total, run: Workout) => total + run.distance / 1000, 0).toFixed(2))
     );
-    this.averageRunDistance$ = this.workouts$.pipe(
+    this.averageRunDistance$ = this.runs$.pipe(
       map((runs: Workout[]) => runs.reduce((total, run: Workout) => total + run.distance / 1000, 0) / runs.length)
     );
 
@@ -48,10 +48,10 @@ export class HomeComponent {
       map((workouts: Workout[]) => workouts.filter((workout:Workout) => workout.type === "ride"))
     );
     this.rideTotal$ = this.rides$.pipe(
-      map((runs: Workout[]) => runs.reduce((total, run: Workout) => total + run.distance / 1000, 0).toFixed(2))
+      map((rides: Workout[]) => rides.reduce((total, ride: Workout) => total + ride.distance / 1000, 0).toFixed(2))
     );
     this.averageRideDistance$ = this.rides$.pipe(
-      map((runs: Workout[]) => runs.reduce((total, run: Workout) => total + run.distance / 1000, 0) / runs.length)
+      map((rides: Workout[]) => rides.reduce((total, ride: Workout) => total + ride.distance / 1000, 0) / rides.length)
     );
   }
 }
